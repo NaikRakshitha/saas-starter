@@ -1,5 +1,8 @@
 # Next.js SaaS Starter with Stripe & Authentication
 
+**[🚀 Buy on Gumroad for $39](https://rakshithan3.gumroad.com/l/kyrwk
+)** | **[View on GitHub (Free)](https://github.com/YOUR_USERNAME/saas-starter)**
+
 A complete, production-ready SaaS template built with Next.js 14, TypeScript, Tailwind CSS, and Stripe payments.
 
 Launch your SaaS in minutes, not months.
