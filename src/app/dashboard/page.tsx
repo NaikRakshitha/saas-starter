@@ -46,9 +46,15 @@ export default function DashboardPage() {
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
   }
 
+
+
   if (!session) {
+    router.push('/auth/login');
     return null; // or a loading spinner
   }
+
+  const isAdmin = session?.user?.role === 'ADMIN';
+  console.log('User role:', session?.user?.role);
 
   const isActive = subscription?.status === 'active';
   const planName = subscription?.planName || 'Free';
@@ -62,17 +68,30 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-slate-50">
         <div className="bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
                 <p className="mt-1 text-sm text-slate-600">Welcome back, {session.user?.name || session.user?.email}</p>
+                {isAdmin && (
+                  <p className="mt-1 text-sm text-blue-600 font-medium">👑 Admin Access Enabled</p>
+                )}
               </div>
-              <button 
-                onClick={() => signOut({ redirect: true, callbackUrl: '/auth/login' })}
-                className="mt-4 sm:mt-0 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium transition-colors"
-              >
-                Sign Out
-              </button>
+              <div className="flex flex-col sm:flex-row gap-3">
+                {isAdmin && (
+                  <Link
+                    href="/admin/dashboard"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors text-center"
+                  >
+                    🔑 Admin Panel
+                  </Link>
+                )}
+                <button 
+                  onClick={() => signOut({ redirect: true, callbackUrl: '/auth/login' })}
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium transition-colors"
+                >
+                  Sign Out
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -1,8 +1,18 @@
 'use client';
 
+import { Toaster } from 'react-hot-toast';
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
 
-export function LayoutClient({ children }: { children: ReactNode }) {
-  return <SessionProvider>{children}</SessionProvider>;
+interface LayoutClientProps {
+  children: ReactNode;
+}
+
+export function LayoutClient({ children }: LayoutClientProps) {
+  return (
+    <SessionProvider>
+      {children}
+      <Toaster position="top-right" />
+    </SessionProvider>
+  );
 }

@@ -14,12 +14,14 @@ model User {
   emailVerified DateTime?
   password      String?
   image         String?
+  role          String    @default("USER")  // NEW: Add admin role
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-
   accounts      Account[]
   sessions      Session[]
   subscriptions Subscription[]
+  adminLogs     AdminLog[] @relation("AdminUser")  // NEW: Track admin actions
+  userFeatureFlags UserFeatureFlag[]
 }
 
 model Account {
@@ -35,9 +37,7 @@ model Account {
   scope              String?
   id_token           String?
   session_state      String?
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@unique([provider, providerAccountId])
 }
 
@@ -53,7 +53,6 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-
   @@unique([identifier, token])
 }
 
@@ -68,6 +67,48 @@ model Subscription {
   planName               String?
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AdminLog {
+  id        String   @id @default(cuid())
+  adminId   String
+  action    String   // "user_suspended", "subscription_cancelled", etc
+  targetId  String?  // ID of user/subscription being modified
+  details   String?  // JSON stringified details
+  createdAt DateTime @default(now())
+  
+  admin     User     @relation("AdminUser", fields: [adminId], references: [id], onDelete: Cascade)
+  
+  @@index([adminId])
+  @@index([createdAt])
+}
+
+model FeatureFlag {
+  id        String   @id @default(cuid())
+  name      String   @unique  // "newPricing", "darkMode", etc
+  enabled   Boolean  @default(false)
+  percentage Int     @default(100)  // 0-100, % of users who see it
+  description String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  userFlags UserFeatureFlag[]
+  
+  @@index([enabled])
+}
+
+model UserFeatureFlag {
+  id            String   @id @default(cuid())
+  userId        String
+  featureFlagId String
+  enabled       Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  featureFlag   FeatureFlag   @relation(fields: [featureFlagId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, featureFlagId])
+  @@index([userId])
+  @@index([featureFlagId])
 }
