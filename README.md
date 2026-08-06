@@ -7,7 +7,62 @@ A complete, production-ready SaaS template built with Next.js 14, TypeScript, Ta
 
 Launch your SaaS in minutes, not months.
 
-## Features
+## v2.0.0 - Admin Panel & Feature Flags (NEW!)
+
+### What's New in v2
+
+✅ **Complete Admin Dashboard**
+- Dashboard with key metrics (users, subscriptions, MRR)
+- User management (suspend/activate subscriptions)
+- Subscription management (cancel subscriptions)
+- Admin audit logs (track all actions)
+- Feature management sidebar
+
+✅ **Feature Flags System**
+- Create and manage feature flags
+- Enable/disable globally
+- Control rollout percentage (0-100%)
+- User-specific overrides
+- Perfect for A/B testing
+
+✅ **Professional Admin UI**
+- Responsive design
+- Tables with real data
+- Toast notifications
+- Confirmation dialogs
+- Loading states
+- Error handling
+
+### Features
+
+#### Authentication
+- Email/Password signup & login
+- Google OAuth
+- GitHub OAuth
+- Role-based access (USER vs ADMIN)
+- NextAuth integration
+
+#### Payments
+- Stripe integration
+- Subscription management
+- Payment webhooks
+- MRR tracking
+
+#### Admin Panel
+- User management
+- Subscription management
+- Feature flags
+- Audit logs
+- Dashboard metrics
+
+#### Developer Experience
+- Full TypeScript
+- Prisma ORM
+- Next.js 14
+- Tailwind CSS
+- API routes
+
+## v1.0.0 Features
 
 ✨ **Authentication**
 - Email/password signup & login
