@@ -33,36 +33,7 @@ Launch your SaaS in minutes, not months.
 - Loading states
 - Error handling
 
-### Features
-
-#### Authentication
-- Email/Password signup & login
-- Google OAuth
-- GitHub OAuth
-- Role-based access (USER vs ADMIN)
-- NextAuth integration
-
-#### Payments
-- Stripe integration
-- Subscription management
-- Payment webhooks
-- MRR tracking
-
-#### Admin Panel
-- User management
-- Subscription management
-- Feature flags
-- Audit logs
-- Dashboard metrics
-
-#### Developer Experience
-- Full TypeScript
-- Prisma ORM
-- Next.js 14
-- Tailwind CSS
-- API routes
-
-## v1.0.0 Features
+##Features
 
 ✨ **Authentication**
 - Email/password signup & login
